@@ -1,33 +1,674 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Spring 6기 | 우리 팀 이야기 카드</title><style>
-:root{font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Noto Sans KR',sans-serif;color:#202536;background:#f5f6f9}*{box-sizing:border-box}body{margin:0;padding:30px 14px}.shell{max-width:650px;margin:auto}.eyebrow{font-size:12px;letter-spacing:2px;font-weight:700;color:#697388}.header{display:flex;justify-content:space-between;gap:20px;align-items:center;margin:5px 0 24px}h1{font-size:29px;margin:8px 0}p{margin:0;color:#7b8291;font-size:13px;line-height:1.65}.pill{border-radius:20px;background:#e8ebf6;padding:8px 12px;color:#425078;font-weight:700;font-size:11px}.panel{background:white;border:1px solid #e6e8ed;border-radius:20px;padding:20px;box-shadow:0 8px 30px #202b4810;margin-top:14px}.sectionlabel{font-size:12px;color:#7a8498;font-weight:700;margin-bottom:12px}.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.cat{background:#f7f8fb;color:#4b5264;border:1px solid #e8eaf0;padding:12px 8px;border-radius:13px;cursor:pointer;font-size:13px;font-weight:650;line-height:1.4}.cat.active{background:#26344f;color:white;border-color:#26344f}.card{min-height:250px;background:linear-gradient(150deg,#253654,#3b4660);color:white;border-radius:20px;display:flex;flex-direction:column;padding:24px;margin-top:14px}.cardtop{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:#c5cfde}.question{display:flex;align-items:center;justify-content:center;text-align:center;flex:1;font-size:25px;line-height:1.5;font-weight:720;word-break:keep-all;padding:18px 5px}.hint{text-align:center;font-size:11px;color:#c0c9d9}.actions{display:grid;grid-template-columns:1fr 1.7fr 1fr;gap:8px;margin-top:14px}button{font:inherit;cursor:pointer}button.action{border:1px solid #e0e3eb;background:#fff;color:#394255;border-radius:12px;min-height:45px;font-weight:700}.action.primary{background:#26344f;color:white;border-color:#26344f}.timerset{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}.timerset label{font-size:12px;color:#68738b;font-weight:700}.timerset input{width:76px;padding:9px 10px;border:1px solid #dbe1e9;border-radius:9px;font:inherit;font-size:14px;text-align:right}.timerset button{border:1px solid #e0e3eb;background:#f7f8fb;color:#394255;border-radius:9px;padding:9px 11px;font-size:12px;font-weight:700}.timerbar{display:flex;align-items:center;justify-content:space-between;gap:16px}.time{font-size:40px;letter-spacing:1px;font-weight:750;font-variant-numeric:tabular-nums}.timerbuttons{display:flex;gap:7px}.timerbuttons button{border:1px solid #e3e6ed;background:#f7f8fb;padding:9px 12px;border-radius:10px;font-size:12px;font-weight:700}.timeprogress{height:6px;background:#edf0f5;border-radius:6px;overflow:hidden;margin:14px 0 0}.timeprogress div{height:100%;width:100%;background:#667daa;transition:width .4s}.info{display:flex;align-items:center;gap:8px;font-size:12px;color:#68738b;margin-top:15px}.dot{width:7px;height:7px;background:#e9a94a;border-radius:50%}.dot.ok{background:#36a588}.footer{font-size:12px;line-height:1.7;color:#838b9b;margin-top:15px}a{color:#425e94}summary{cursor:pointer;font-size:12px;color:#65718a}.details{font-size:12px;line-height:1.7;color:#65718a;margin-top:10px}@media(max-width:450px){h1{font-size:24px}.question{font-size:21px}.panel{padding:15px}.cat{font-size:11px;padding:12px 5px}.time{font-size:33px}}
-</style></head><body><div class="shell"><div class="eyebrow">SPRING BOOTCAMP · TEAM TALK</div><div class="header"><div><h1>우리 팀, 이야기 카드</h1><p>서로를 알아가는 질문 카드, 원하는 시간만큼 편하게 이야기해요.</p></div><div class="pill">SPRING 6기</div></div>
-<div class="panel"><div class="sectionlabel">대화 주제 선택</div><div class="categories" id="categories"></div><div class="card"><div class="cardtop"><span id="catname">우리, 먼저 알아가기</span><span id="count">1 / 1</span></div><div class="question" id="question">질문을 불러오는 중입니다.</div><div class="hint">정답은 없어요. 부담 없이 서로의 이야기를 들려주세요.</div></div><div class="actions"><button class="action" id="prev">이전</button><button class="action primary" id="next">다음 질문 →</button><button class="action" id="random">랜덤</button></div></div>
-<div class="panel"><div class="sectionlabel">대화 타이머</div><div class="timerset"><label for="duration">대화 시간</label><input id="duration" type="number" min="1" max="999" step="1" value="20" inputmode="numeric" aria-label="대화 시간(분)"><span style="font-size:12px;color:#68738b">분</span><button id="applytime">시간 설정</button></div><div class="timerbar"><div class="time" id="clock">20:00</div><div class="timerbuttons"><button id="toggle">시작</button><button id="reset">초기화</button></div></div><div class="timeprogress"><div id="progress"></div></div><div class="info"><span class="dot" id="statusdot"></span><span id="status">질문 시트 연결 확인 중</span><button id="refresh" style="margin-left:auto;border:0;background:transparent;color:#506c9a;font-size:12px">새로고침</button></div></div>
-<div class="footer"><a href="https://docs.google.com/spreadsheets/d/1xDcP7lelWfm1TWt5vAourx9lzQVt2mcNLpMI_y8AAIY/edit" target="_blank" rel="noopener">질문 관리 구글 시트 열기 ↗</a><br>수강생 여러분께 안내드립니다. 질문 관리 시트는 운영진 전용이므로 내용을 수정하지 말아 주세요.</div>
-</div>
+
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Talk Cards | SPARTA NBC</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Noto Sans KR", sans-serif;
+  color: #242724;
+  background: #fafaf6;
+  --ink: #242724;
+  --muted: #858b82;
+  --line: #e7e9e2;
+  --lime: #d8f58b;
+  --yellow: #ffdd69;
+  --lilac: #dac3fc;
+  --mint: #c9eede;
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 38px 16px 65px; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.shell { max-width: 650px; margin: auto; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: "Fredoka", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  color: #6b766b;
+}
+.eyebrow::before {
+  content: "";
+  width: 11px;
+  height: 11px;
+  background: var(--lime);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+}
+h1 {
+  margin: 12px 0 4px;
+  font-family: "Fredoka", sans-serif;
+  font-size: clamp(38px, 7vw, 52px);
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+.subtitle {
+  margin: 0 0 30px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 22px;
+  margin-top: 16px;
+  box-shadow: 0 6px 22px rgba(29, 37, 24, .035);
+}
+.sectionlabel {
+  font-size: 12px;
+  font-weight: 750;
+  color: #777f75;
+  margin-bottom: 14px;
+}
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+.cat {
+  min-height: 47px;
+  border: 1px solid #e8eae5;
+  background: #f7f8f5;
+  border-radius: 14px;
+  padding: 10px 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #747a70;
+  transition: background .2s, transform .2s;
+}
+.cat:hover { transform: translateY(-2px); }
+.cat.active {
+  background: #272e29;
+  border-color: #272e29;
+  color: white;
+}
+
+/* 카드 스택 */
+.deck {
+  position: relative;
+  margin: 30px 6px 36px;
+  padding-bottom: 14px;
+}
+.deck::before, .deck::after {
+  content: "";
+  position: absolute;
+  border: 2px solid #282e28;
+  border-radius: 25px;
+  inset: 10px 2px 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.deck::before {
+  background: var(--lilac);
+  transform: rotate(-3deg) translate(-4px, 5px);
+}
+.deck::after {
+  background: var(--mint);
+  transform: rotate(2.5deg) translate(5px, 3px);
+}
+.card {
+  position: relative;
+  z-index: 1;
+  min-height: 300px;
+  background: #f4fce8;
+  border: 2px solid #282e28;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  padding: 23px;
+  box-shadow: 4px 6px 0 rgba(34, 43, 34, .09);
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
+.cardtop {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+  font-size: 12px;
+  color: #656e62;
+}
+.counter {
+  background: white;
+  border: 1px solid #dee7d4;
+  border-radius: 20px;
+  padding: 6px 10px;
+  white-space: nowrap;
+  font-family: "Fredoka", sans-serif;
+}
+.question {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 30px 5px;
+  font-size: clamp(21px, 4.5vw, 27px);
+  font-weight: 750;
+  line-height: 1.55;
+  letter-spacing: -.6px;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.hint {
+  text-align: center;
+  font-size: 11px;
+  color: #879083;
+}
+.card.out-left { animation: outLeft .22s ease-in forwards; }
+.card.out-right { animation: outRight .22s ease-in forwards; }
+.card.in-right { animation: inRight .35s cubic-bezier(.2,1.35,.35,1) both; }
+.card.in-left { animation: inLeft .35s cubic-bezier(.2,1.35,.35,1) both; }
+@keyframes outLeft {
+  to { transform: translateX(-95px) rotate(-8deg); opacity: 0; }
+}
+@keyframes outRight {
+  to { transform: translateX(95px) rotate(8deg); opacity: 0; }
+}
+@keyframes inRight {
+  from { transform: translateX(65px) rotate(6deg) scale(.97); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes inLeft {
+  from { transform: translateX(-65px) rotate(-6deg) scale(.97); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+/* 카드 버튼 */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 10px;
+}
+.action {
+  min-height: 49px;
+  border-radius: 14px;
+  background: #f6f7f3;
+  border: 1.5px solid #e3e7de;
+  color: #3d463e;
+  font-size: 13px;
+  font-weight: 750;
+  transition: transform .15s, background .15s;
+}
+.action:hover { transform: translateY(-2px); }
+.action:active { transform: translateY(1px) scale(.98); }
+.action.primary {
+  background: #272e29;
+  color: white;
+  border-color: #272e29;
+}
+
+/* 타이머 */
+.timerhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.timerhead .sectionlabel { margin: 0; }
+.timericon {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  background: var(--yellow);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  font-family: "Fredoka", sans-serif;
+}
+.timerset {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 20px 0 16px;
+}
+.timerset label {
+  color: #757f72;
+  font-size: 12px;
+  font-weight: 700;
+}
+.timerset input {
+  width: 70px;
+  padding: 9px;
+  background: #f8f9f6;
+  border: 1px solid #e1e5de;
+  border-radius: 11px;
+  text-align: center;
+  font-size: 14px;
+}
+.timerset button, .timerbuttons button {
+  padding: 10px 13px;
+  background: #f7f8f5;
+  border: 1px solid #e3e6df;
+  border-radius: 11px;
+  font-size: 12px;
+  font-weight: 750;
+}
+.timerbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+.time {
+  font-family: "Fredoka", sans-serif;
+  font-size: 43px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  font-variant-numeric: tabular-nums;
+}
+.timerbuttons { display: flex; gap: 7px; }
+#toggle {
+  background: var(--lime);
+  border-color: #b9dc6d;
+}
+.timeprogress {
+  height: 9px;
+  background: #f0f1ec;
+  border-radius: 20px;
+  margin-top: 18px;
+  overflow: hidden;
+}
+#progress {
+  width: 100%;
+  height: 100%;
+  background: #c5e878;
+  border-radius: inherit;
+  transition: width .3s linear;
+}
+.info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 19px;
+  font-size: 11px;
+  color: #848c82;
+}
+.dot {
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #edb455;
+}
+.dot.ok { background: #59b48c; }
+#refresh {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: #526b59;
+  font-size: 11px;
+  font-weight: 750;
+}
+.footer {
+  padding: 23px 4px;
+  color: #899087;
+  font-size: 11px;
+  line-height: 1.9;
+}
+.footer a { color: #445d47; font-weight: 700; }
+
+@media (max-width: 450px) {
+  body { padding: 25px 12px 40px; }
+  .panel { padding: 16px; border-radius: 19px; }
+  .cat { font-size: 11px; }
+  .deck { margin: 28px 5px 36px; }
+  .card { min-height: 285px; padding: 19px; }
+  .question { font-size: 21px; }
+  .time { font-size: 36px; }
+  .timerbuttons button { padding: 9px 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="shell">
+  <div class="eyebrow">SPARTA NBC</div>
+  <h1>Talk Cards</h1>
+  <p class="subtitle">한 장씩 넘기면서, 조금 더 가까워지는 시간.</p>
+
+  <section class="panel">
+    <div class="sectionlabel">대화 주제 선택</div>
+    <div class="categories" id="categories"></div>
+
+    <div class="deck" id="deck">
+      <div class="card" id="card">
+        <div class="cardtop">
+          <span id="catname">우리, 먼저 알아가기</span>
+          <span class="counter" id="count">1 / 1</span>
+        </div>
+        <div class="question" id="question">질문을 불러오는 중입니다.</div>
+        <div class="hint">정답은 없어요. 편하게 이야기를 나눠보세요.</div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="action" id="prev">← 이전</button>
+      <button class="action primary" id="next">다음 카드 →</button>
+      <button class="action" id="random">랜덤</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="timerhead">
+      <div class="sectionlabel">대화 타이머</div>
+      <div class="timericon">⏱</div>
+    </div>
+
+    <div class="timerset">
+      <label for="duration">대화 시간</label>
+      <input id="duration" type="number" min="1" max="999" value="20">
+      <span style="font-size:12px;color:#777f75">분</span>
+      <button id="applytime">시간 설정</button>
+    </div>
+
+    <div class="timerbar">
+      <div class="time" id="clock">20:00</div>
+      <div class="timerbuttons">
+        <button id="toggle">시작</button>
+        <button id="reset">초기화</button>
+      </div>
+    </div>
+
+    <div class="timeprogress">
+      <div id="progress"></div>
+    </div>
+
+    <div class="info">
+      <span class="dot" id="statusdot"></span>
+      <span id="status">질문 시트 연결 확인 중</span>
+      <button id="refresh">새로고침 ↻</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <a href="https://docs.google.com/spreadsheets/d/1xDcP7lelWfm1TWt5vAourx9lzQVt2mcNLpMI_y8AAIY/edit"
+       target="_blank" rel="noopener noreferrer">질문 관리 구글 시트 열기 ↗</a>
+    <div>질문 관리 시트는 운영진 전용입니다. 수강생 여러분께서는 내용을 수정하지 말아 주세요.</div>
+  </footer>
+</main>
+
 <script>
-const SHEET='1xDcP7lelWfm1TWt5vAourx9lzQVt2mcNLpMI_y8AAIY', GID='0';
-const names=['우리, 먼저 알아가기','함께하는 팀 프로젝트','진로와 취업, 우리의 고민'];
-const short=['자기소개 · 일상','팀 프로젝트','진로 · 취업'];
-const fallback=[['우리, 먼저 알아가기','이번 부트캠프에 들어오게 된 이유는 무엇인가요?'],['우리, 먼저 알아가기','쉬는 날에는 보통 무엇을 하나요?'],['우리, 먼저 알아가기','요즘 좋아하는 취미나 콘텐츠는 무엇인가요?'],['함께하는 팀 프로젝트','이번 프로젝트에서 가장 기대되는 점은 무엇인가요?'],['함께하는 팀 프로젝트','의견이 다를 때 어떻게 해결하면 좋을까요?'],['함께하는 팀 프로젝트','팀원에게 바라는 소통 방식이 있나요?'],['진로와 취업, 우리의 고민','현재 관심 있는 개발 직무는 무엇인가요?'],['진로와 취업, 우리의 고민','취업 준비에서 가장 걱정되는 점은 무엇인가요?'],['진로와 취업, 우리의 고민','캠프 수료 전 어떤 역량을 갖추고 싶나요?']];
-let rows=fallback,cat=0,idx=0;const el=id=>document.getElementById(id);
-function draw(){el('categories').innerHTML='';names.forEach((n,i)=>{let b=document.createElement('button');b.className='cat'+(cat===i?' active':'');b.textContent=short[i];b.onclick=()=>{cat=i;idx=0;draw()};el('categories').append(b)});let qs=rows.filter(r=>r[0]===names[cat]);el('catname').textContent=names[cat];el('count').textContent=(qs.length?idx%qs.length+1:0)+' / '+qs.length;el('question').textContent=qs.length?qs[idx%qs.length][1]:'이 카테고리에 등록된 질문이 없습니다.'}
-function move(shift){let n=rows.filter(r=>r[0]===names[cat]).length;if(!n)return;idx=(idx+shift+n)%n;draw()}
-el('prev').onclick=()=>move(-1);el('next').onclick=()=>move(1);el('random').onclick=()=>{let n=rows.filter(r=>r[0]===names[cat]).length;if(n>1)move(1+Math.floor(Math.random()*(n-1)))};
-function status(msg,ok){el('status').textContent=msg;el('statusdot').className='dot'+(ok?' ok':'')}
-let seq=0;
-function load(){let token='sheetTalk'+(++seq);let script=document.createElement('script');let done=false;const timer=setTimeout(()=>{if(!done){done=true;status('기본 질문 사용 중 · 시트 공개 설정 확인 필요',false);script.remove()}},9000);
-window[token]=response=>{if(done)return;done=true;clearTimeout(timer);let data=(response.table?.rows||[]).map(r=>[(r.c?.[0]?.v??'').toString().trim(),(r.c?.[1]?.v??'').toString().trim()]).filter(r=>names.includes(r[0])&&r[1]);if(data.length){rows=data;idx=0;draw();status('구글 시트 연결됨 · 질문 '+data.length+'개',true)}else status('시트에 질문이 없거나 공개되지 않았습니다',false);script.remove();delete window[token]};
-script.onerror=()=>{if(done)return;done=true;clearTimeout(timer);status('시트를 읽을 수 없습니다 · 공개 설정 확인',false);script.remove();delete window[token]};
-script.src=`https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq?gid=${GID}&headers=1&tq=${encodeURIComponent('select A,B')}&tqx=${encodeURIComponent('out:json;responseHandler:'+token)}`;document.head.append(script)}
-el('refresh').onclick=load;setInterval(load,60000);
-let duration=1200,remaining=duration,running=false,last=0;
-const clock=()=>{let secs=Math.ceil(remaining),m=Math.floor(secs/60),ss=secs%60;el('clock').textContent=String(m).padStart(2,'0')+':'+String(ss).padStart(2,'0');el('progress').style.width=(duration?remaining/duration*100:0)+'%';el('toggle').textContent=running?'일시정지':remaining===0?'다시 시작':'시작'};
-const setDuration=()=>{const mins=Number(el('duration').value);if(!Number.isInteger(mins)||mins<1||mins>999){alert('1분부터 999분까지 정수로 입력해 주세요.');return;}duration=mins*60;remaining=duration;running=false;clock()};
-el('applytime').onclick=setDuration;
-el('duration').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();setDuration()}});
-el('toggle').onclick=()=>{if(remaining<=0)remaining=duration;running=!running;last=Date.now();clock()};
-el('reset').onclick=()=>{running=false;remaining=duration;clock()};
-setInterval(()=>{if(!running)return;let now=Date.now();remaining=Math.max(0,remaining-(now-last)/1000);last=now;if(remaining===0){running=false;alert('설정한 대화 시간이 끝났습니다!')}clock()},250);
-draw();clock();load();
-</script></body></html>
+const SHEET = "1xDcP7lelWfm1TWt5vAourx9lzQVt2mcNLpMI_y8AAIY";
+const GID = "0";
+
+const names = [
+  "우리, 먼저 알아가기",
+  "함께하는 팀 프로젝트",
+  "진로와 취업, 우리의 고민"
+];
+
+const short = [
+  "자기소개 · 일상",
+  "팀 프로젝트",
+  "진로 · 취업"
+];
+
+const fallback = [
+  ["우리, 먼저 알아가기", "이번 부트캠프에 들어오게 된 이유는 무엇인가요?"],
+  ["우리, 먼저 알아가기", "쉬는 날에는 보통 무엇을 하나요?"],
+  ["우리, 먼저 알아가기", "요즘 좋아하는 취미나 콘텐츠는 무엇인가요?"],
+  ["함께하는 팀 프로젝트", "이번 프로젝트에서 가장 기대되는 점은 무엇인가요?"],
+  ["함께하는 팀 프로젝트", "의견이 다를 때 어떻게 해결하면 좋을까요?"],
+  ["함께하는 팀 프로젝트", "팀원에게 바라는 소통 방식이 있나요?"],
+  ["진로와 취업, 우리의 고민", "현재 관심 있는 개발 직무는 무엇인가요?"],
+  ["진로와 취업, 우리의 고민", "취업 준비에서 가장 걱정되는 점은 무엇인가요?"],
+  ["진로와 취업, 우리의 고민", "캠프 수료 전 어떤 역량을 갖추고 싶나요?"]
+];
+
+let rows = fallback;
+let cat = 0;
+let idx = 0;
+let animating = false;
+
+const el = id => document.getElementById(id);
+const questions = () => rows.filter(r => r[0] === names[cat]);
+
+function render() {
+  el("categories").innerHTML = "";
+
+  names.forEach((name, i) => {
+    const button = document.createElement("button");
+    button.className = "cat" + (cat === i ? " active" : "");
+    button.textContent = short[i];
+    button.onclick = () => changeCategory(i);
+    el("categories").append(button);
+  });
+
+  const qs = questions();
+
+  if (qs.length) idx = ((idx % qs.length) + qs.length) % qs.length;
+  else idx = 0;
+
+  el("catname").textContent = names[cat];
+  el("count").textContent = (qs.length ? idx + 1 : 0) + " / " + qs.length;
+  el("question").textContent = qs.length
+    ? qs[idx][1]
+    : "이 카테고리에 등록된 질문이 없습니다.";
+}
+
+function animateCard(direction, callback) {
+  if (animating) return;
+
+  const card = el("card");
+  animating = true;
+
+  card.classList.remove("out-left", "out-right", "in-left", "in-right");
+  card.classList.add(direction === "left" ? "out-left" : "out-right");
+
+  setTimeout(() => {
+    callback();
+    render();
+
+    card.classList.remove("out-left", "out-right");
+    card.classList.add(direction === "left" ? "in-right" : "in-left");
+
+    setTimeout(() => {
+      card.classList.remove("in-left", "in-right");
+      animating = false;
+    }, 360);
+  }, 220);
+}
+
+function changeCategory(i) {
+  if (cat === i || animating) return;
+  animateCard("left", () => {
+    cat = i;
+    idx = 0;
+  });
+}
+
+function move(shift) {
+  const n = questions().length;
+  if (!n || animating) return;
+
+  animateCard(shift > 0 ? "left" : "right", () => {
+    idx = (idx + shift + n) % n;
+  });
+}
+
+el("prev").onclick = () => move(-1);
+el("next").onclick = () => move(1);
+
+el("random").onclick = () => {
+  const n = questions().length;
+  if (n < 2 || animating) return;
+  const shift = 1 + Math.floor(Math.random() * (n - 1));
+  move(shift);
+};
+
+let touchStartX = 0;
+
+el("deck").addEventListener("touchstart", event => {
+  touchStartX = event.changedTouches[0].screenX;
+}, { passive: true });
+
+el("deck").addEventListener("touchend", event => {
+  const distance = event.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(distance) > 55) move(distance < 0 ? 1 : -1);
+}, { passive: true });
+
+function status(message, ok) {
+  el("status").textContent = message;
+  el("statusdot").className = "dot" + (ok ? " ok" : "");
+}
+
+let sequence = 0;
+
+function load() {
+  const token = "sheetTalk" + (++sequence);
+  const script = document.createElement("script");
+  let done = false;
+
+  const timeout = setTimeout(() => {
+    if (done) return;
+    done = true;
+    status("기본 질문 사용 중 · 시트 공개 설정 확인 필요", false);
+    script.remove();
+    delete window[token];
+  }, 9000);
+
+  window[token] = response => {
+    if (done) return;
+    done = true;
+    clearTimeout(timeout);
+
+    const data = (response.table?.rows || [])
+      .map(row => [
+        String(row.c?.[0]?.v ?? "").trim(),
+        String(row.c?.[1]?.v ?? "").trim()
+      ])
+      .filter(row => names.includes(row[0]) && row[1]);
+
+    if (data.length) {
+      const oldQuestion = questions()[idx]?.[1];
+
+      rows = data;
+      const current = questions();
+      const newIndex = current.findIndex(row => row[1] === oldQuestion);
+
+      idx = newIndex >= 0 ? newIndex : Math.min(idx, Math.max(0, current.length - 1));
+      render();
+      status("구글 시트 연결됨 · 질문 " + data.length + "개", true);
+    } else {
+      status("질문을 불러오지 못했습니다", false);
+    }
+
+    script.remove();
+    delete window[token];
+  };
+
+  script.onerror = () => {
+    if (done) return;
+    done = true;
+    clearTimeout(timeout);
+    status("시트 연결을 확인해 주세요", false);
+    script.remove();
+    delete window[token];
+  };
+
+  const query = encodeURIComponent("select A,B");
+  const responseHandler = encodeURIComponent("out:json;responseHandler:" + token);
+
+  script.src =
+    `https://docs.google.com/spreadsheets/d/${SHEET}/gviz/tq` +
+    `?gid=${GID}&headers=1&tq=${query}&tqx=${responseHandler}&_=${Date.now()}`;
+
+  document.head.append(script);
+}
+
+el("refresh").onclick = load;
+setInterval(load, 60000);
+
+/* 타이머 */
+let duration = 1200;
+let remaining = duration;
+let running = false;
+let last = 0;
+
+function clock() {
+  const secs = Math.ceil(remaining);
+  const mins = Math.floor(secs / 60);
+  const seconds = secs % 60;
+
+  el("clock").textContent =
+    String(mins).padStart(2, "0") + ":" +
+    String(seconds).padStart(2, "0");
+
+  el("progress").style.width =
+    (duration ? remaining / duration * 100 : 0) + "%";
+
+  el("toggle").textContent =
+    running ? "일시정지" : remaining === 0 ? "다시 시작" : "시작";
+}
+
+function setDuration() {
+  const minutes = Number(el("duration").value);
+
+  if (!Number.isInteger(minutes) || minutes < 1 || minutes > 999) {
+    alert("1분부터 999분까지 입력해 주세요.");
+    return;
+  }
+
+  duration = minutes * 60;
+  remaining = duration;
+  running = false;
+  clock();
+}
+
+el("applytime").onclick = setDuration;
+
+el("duration").addEventListener("keydown", event => {
+  if (event.key === "Enter") setDuration();
+});
+
+el("toggle").onclick = () => {
+  if (remaining <= 0) remaining = duration;
+  running = !running;
+  last = Date.now();
+  clock();
+};
+
+el("reset").onclick = () => {
+  running = false;
+  remaining = duration;
+  clock();
+};
+
+setInterval(() => {
+  if (!running) return;
+
+  const now = Date.now();
+  remaining = Math.max(0, remaining - (now - last) / 1000);
+  last = now;
+
+  if (remaining === 0) {
+    running = false;
+    alert("설정한 대화 시간이 끝났습니다!");
+  }
+
+  clock();
+}, 250);
+
+render();
+clock();
+load();
+</script>
+</body>
+</html>
