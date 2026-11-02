@@ -14,56 +14,54 @@
   <style>
     :root {
       --ink: #263128;
-      --muted: #849081;
       --bg: #fafaf5;
       --lime: #d8f58b;
       --border: #303a32;
-      font-family: "Gaegu", cursive;
-      color: var(--ink);
-      background: var(--bg);
-      letter-spacing: -0.45px;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
+      padding: 35px 18px 60px;
       min-height: 100vh;
-      padding: 35px 18px 50px;
-      font-family: "Gaegu", cursive;
       background: var(--bg);
-    }
-
-    button, input {
+      color: var(--ink);
       font-family: "Gaegu", cursive;
-      letter-spacing: -0.55px;
+      letter-spacing: -0.45px;
     }
 
     button {
+      font-family: "Gaegu", cursive;
+      letter-spacing: -0.55px;
       cursor: pointer;
       transition: transform .15s;
     }
 
-    button:active { transform: scale(.96); }
+    button:active {
+      transform: scale(.96);
+    }
 
-    button:focus-visible, a:focus-visible {
+    button:focus-visible {
       outline: 3px solid #a7cb70;
       outline-offset: 3px;
     }
 
     .app {
       max-width: 760px;
-      margin: 0 auto;
+      margin: auto;
     }
 
-    /* 헤더 */
+    /* HEADER */
 
     .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 22px;
-      margin-bottom: 31px;
+      margin-bottom: 32px;
     }
 
     .brand {
@@ -79,9 +77,9 @@
     .brand-dot {
       width: 12px;
       height: 12px;
+      background: var(--lime);
       border: 1.5px solid var(--ink);
       border-radius: 50%;
-      background: var(--lime);
     }
 
     h1 {
@@ -93,31 +91,33 @@
       line-height: 1.1;
     }
 
-    .title-dot { color: #a4c36b; }
+    .title-dot {
+      color: #a4c36b;
+    }
 
     .subtitle {
       margin: 8px 0 0;
-      color: var(--muted);
+      color: #849081;
       font-size: 19px;
       line-height: 1.3;
     }
 
-    /* 작은 한 줄 타이머 */
+    /* TIMER */
 
     .timer {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 12px;
-      background: #fff;
+      background: white;
       border: 1px solid #e0e6db;
       border-radius: 17px;
       flex-shrink: 0;
     }
 
     .timer-symbol {
-      font-size: 21px;
       color: #59715e;
+      font-size: 21px;
     }
 
     .clock {
@@ -131,9 +131,9 @@
       width: 30px;
       height: 32px;
       padding: 0;
+      background: #f6f8f3;
       border: 1px solid #e0e6dc;
       border-radius: 9px;
-      background: #f6f8f3;
       color: var(--ink);
       font-size: 21px;
       font-weight: 700;
@@ -151,11 +151,11 @@
 
     #reset {
       background: transparent;
-      border-color: transparent;
+      border: none;
       font-size: 26px;
     }
 
-    /* 카테고리 */
+    /* CATEGORY */
 
     .categories {
       display: flex;
@@ -166,9 +166,9 @@
 
     .category-btn {
       padding: 10px 16px;
+      background: #e9eee7;
       border: none;
       border-radius: 100px;
-      background: #e9eee7;
       color: #667566;
       font-size: 19px;
       font-weight: 700;
@@ -180,7 +180,7 @@
       color: white;
     }
 
-    /* 카드 스택 */
+    /* CARD STACK */
 
     .deck {
       position: relative;
@@ -213,18 +213,18 @@
     .card {
       position: relative;
       z-index: 1;
-      min-height: 340px;
       display: flex;
       flex-direction: column;
+      min-height: 340px;
       padding: 29px;
       background: #f1fbe3;
       border: 2px solid var(--border);
       border-radius: 27px;
+      transform-origin: center bottom;
       transition:
         background-color .25s,
-        opacity .2s,
-        transform .2s;
-      transform-origin: center bottom;
+        transform .2s,
+        opacity .2s;
     }
 
     .card.switching-left {
@@ -238,7 +238,8 @@
     }
 
     .card.entering {
-      animation: cardPop .3s cubic-bezier(.2, 1.2, .35, 1);
+      animation: cardPop .3s
+        cubic-bezier(.2, 1.2, .35, 1);
     }
 
     @keyframes cardPop {
@@ -255,29 +256,34 @@
 
     .card-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 12px;
     }
 
     .card-label {
+      color: #5b7157;
       font-size: 17px;
       font-weight: 700;
-      color: #5b7157;
       letter-spacing: -0.6px;
     }
 
     .counter {
       padding: 5px 12px;
+      background: #ffffffc9;
       border: 1px solid #00000010;
       border-radius: 30px;
-      background: #ffffffc9;
       font-size: 18px;
       font-weight: 700;
       white-space: nowrap;
     }
 
-    /* 질문 글씨: 볼드 + 자간 축소 */
+    /*
+      CARD QUESTION FONT
+      Gaegu 손글씨 유지
+      글씨 굵기 강화
+      자간 -1.2px
+    */
 
     .question {
       display: flex;
@@ -285,13 +291,13 @@
       justify-content: center;
       flex: 1;
       padding: 35px 6px;
-      text-align: center;
 
       font-family: "Gaegu", cursive;
       font-size: clamp(30px, 5vw, 41px);
       font-weight: 700;
       line-height: 1.28;
       letter-spacing: -1.2px;
+      text-align: center;
 
       -webkit-text-stroke: .35px currentColor;
       paint-order: stroke fill;
@@ -301,19 +307,19 @@
     }
 
     .card-footer {
-      text-align: center;
       color: #68805f;
+      text-align: center;
       font-size: 24px;
       font-weight: 700;
       letter-spacing: -0.7px;
     }
 
-    /* 카드 컨트롤 */
+    /* CARD BUTTONS */
 
     .controls {
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       gap: 13px;
     }
 
@@ -323,9 +329,9 @@
       flex-shrink: 0;
       width: 48px;
       height: 48px;
+      background: white;
       border: 1px solid #dce3d8;
       border-radius: 50%;
-      background: white;
       color: var(--ink);
       font-size: 28px;
     }
@@ -334,71 +340,33 @@
       flex: 1;
       max-width: 350px;
       min-height: 50px;
+      background: var(--lime);
       border: 1px solid #bada7b;
       border-radius: 100px;
-      background: var(--lime);
       color: var(--ink);
       font-size: 23px;
       font-weight: 700;
     }
 
-    /* 연결 상태 */
-
-    .sync {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-top: 34px;
-      color: #8c9789;
-      font-size: 17px;
-    }
-
-    .sync-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #deb76f;
-    }
-
-    .sync-dot.connected { background: #62b18c; }
-
-    .refresh-btn {
-      margin-left: auto;
-      padding: 5px 0;
-      border: 0;
-      background: transparent;
-      color: #657d63;
-      font-size: 17px;
-      font-weight: 700;
-    }
-
-    footer {
-      margin-top: 14px;
-      color: #919a8c;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    footer a {
-      color: #617963;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
+    /* TIMER COMPLETION TOAST */
 
     .toast {
       position: fixed;
-      left: 50%;
-      bottom: 25px;
       z-index: 99;
+      bottom: 25px;
+      left: 50%;
       transform: translateX(-50%);
-      padding: 12px 22px;
-      border-radius: 15px;
+      max-width: calc(100vw - 30px);
+      padding: 13px 22px;
       background: #293a2d;
+      border-radius: 15px;
       color: white;
       font-size: 21px;
-      white-space: nowrap;
+      text-align: center;
       box-shadow: 0 8px 25px #0002;
     }
+
+    /* MOBILE */
 
     @media (max-width: 620px) {
       .header {
@@ -407,22 +375,32 @@
         gap: 19px;
       }
 
-      .categories { margin-bottom: 35px; }
+      .categories {
+        margin-bottom: 35px;
+      }
     }
 
     @media (max-width: 450px) {
-      body { padding: 25px 15px 40px; }
+      body {
+        padding: 25px 15px 40px;
+      }
 
-      h1 { font-size: 42px; }
+      h1 {
+        font-size: 42px;
+      }
 
-      .subtitle { font-size: 17px; }
+      .subtitle {
+        font-size: 17px;
+      }
 
       .category-btn {
         padding: 9px 13px;
         font-size: 17px;
       }
 
-      .deck { margin: 0 8px 43px; }
+      .deck {
+        margin: 0 8px 43px;
+      }
 
       .card {
         min-height: 320px;
@@ -434,11 +412,17 @@
         line-height: 1.27;
       }
 
-      .card-label { font-size: 15px; }
+      .card-label {
+        font-size: 15px;
+      }
 
-      .card-footer { font-size: 22px; }
+      .card-footer {
+        font-size: 22px;
+      }
 
-      .next-btn { font-size: 21px; }
+      .next-btn {
+        font-size: 21px;
+      }
 
       .circle-btn {
         width: 45px;
@@ -447,7 +431,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .card, .back-card, button {
+      .card,
+      .back-card,
+      button {
         animation: none !important;
         transition: none !important;
       }
@@ -456,16 +442,20 @@
 </head>
 
 <body>
+
   <main class="app">
 
     <header class="header">
+
       <div class="heading">
         <div class="brand">
           <span class="brand-dot"></span>
           SPARTA NBC
         </div>
 
-        <h1>Talk Cards<span class="title-dot">.</span></h1>
+        <h1>
+          Talk Cards<span class="title-dot">.</span>
+        </h1>
 
         <p class="subtitle">
           한 장씩 넘기면서, 조금 더 가까워지는 시간.
@@ -473,37 +463,75 @@
       </div>
 
       <div class="timer" aria-label="대화 타이머">
+
         <span class="timer-symbol">◷</span>
-        <span class="clock" id="clock" role="timer">20:00</span>
 
-        <button class="timer-btn" id="minus"
-                aria-label="1분 줄이기">−</button>
+        <span class="clock" id="clock" role="timer">
+          20:00
+        </span>
 
-        <button class="timer-btn" id="plus"
-                aria-label="1분 늘리기">+</button>
+        <button
+          type="button"
+          class="timer-btn"
+          id="minus"
+          aria-label="1분 줄이기"
+        >−</button>
 
-        <button class="timer-btn" id="play"
-                aria-label="타이머 시작">▶</button>
+        <button
+          type="button"
+          class="timer-btn"
+          id="plus"
+          aria-label="1분 늘리기"
+        >+</button>
 
-        <button class="timer-btn" id="reset"
-                aria-label="타이머 초기화">↺</button>
+        <button
+          type="button"
+          class="timer-btn"
+          id="play"
+          aria-label="타이머 시작"
+        >▶</button>
+
+        <button
+          type="button"
+          class="timer-btn"
+          id="reset"
+          aria-label="타이머 초기화"
+        >↺</button>
+
       </div>
+
     </header>
 
-    <nav class="categories" id="categories"
-         aria-label="질문 카테고리"></nav>
+    <nav
+      class="categories"
+      id="categories"
+      aria-label="질문 카테고리"
+    ></nav>
 
     <div class="deck" id="deck">
-      <div class="back-card back-one" id="backOne"></div>
-      <div class="back-card back-two" id="backTwo"></div>
+
+      <div
+        class="back-card back-one"
+        id="backOne"
+      ></div>
+
+      <div
+        class="back-card back-two"
+        id="backTwo"
+      ></div>
 
       <section class="card" id="card">
+
         <div class="card-top">
+
           <span class="card-label" id="cardLabel">
             GET TO KNOW YOU
           </span>
 
-          <span class="counter" id="counter">01 / 04</span>
+          <span class="counter" id="counter">
+            01 / 04
+          </span>
+
         </div>
 
         <div class="question" id="question">
@@ -513,28 +541,49 @@
         <div class="card-footer">
           ✳ Let's talk!
         </div>
+
       </section>
     </div>
 
     <div class="controls">
-      <button class="circle-btn" id="prev"
-              aria-label="이전 카드">←</button>
 
-      <button class="next-btn" id="next">
-        다음 카드 →
-      </button>
+      <button
+        type="button"
+        class="circle-btn"
+        id="prev"
+        aria-label="이전 카드"
+      >←</button>
 
-      <button class="circle-btn" id="random"
-              aria-label="랜덤 카드">⤨</button>
+      <button
+        type="button"
+        class="next-btn"
+        id="next"
+      >다음 카드 →</button>
+
+      <button
+        type="button"
+        class="circle-btn"
+        id="random"
+        aria-label="랜덤 카드"
+      >⤨</button>
+
     </div>
+
   </main>
 
   <script>
-    /* 구글 시트 설정 */
+    "use strict";
+
+    /* =====================================
+       BASIC SETTINGS
+    ===================================== */
+
     const SHEET_ID =
       "1xDcP7lelWfm1TWt5vAourx9lzQVt2mcNLpMI_y8AAIY";
 
     const SHEET_GID = "0";
+
+    const $ = id => document.getElementById(id);
 
     const categories = [
       {
@@ -554,7 +603,8 @@
       }
     ];
 
-    /* 구글 시트에 연결되지 않을 때 사용하는 기본 질문 */
+    /* 구글 시트 연결 실패 시 사용 */
+
     const fallback = [
       [
         "우리, 먼저 알아가기",
@@ -599,14 +649,16 @@
     ];
 
     const palette = [
-      "#f1fbe3", // 라임
-      "#ebd9fd", // 라일락
-      "#fff0bb", // 옐로우
-      "#d9f5ed", // 민트
-      "#ffdfd6"  // 피치
+      "#f1fbe3",
+      "#ebd9fd",
+      "#fff0bb",
+      "#d9f5ed",
+      "#ffdfd6"
     ];
 
-    const $ = id => document.getElementById(id);
+    /* =====================================
+       CARD STATE
+    ===================================== */
 
     let rows = fallback;
     let categoryIndex = 0;
@@ -615,18 +667,21 @@
     let animating = false;
 
     function getQuestions() {
-      const name = categories[categoryIndex].name;
-      return rows.filter(row => row[0] === name);
+      const categoryName = categories[categoryIndex].name;
+
+      return rows.filter(
+        row => row[0] === categoryName
+      );
     }
 
-    function render() {
+    function renderCard() {
       const group = categories[categoryIndex];
       const questions = getQuestions();
 
       if (questions.length > 0) {
         cardIndex =
-          ((cardIndex % questions.length) + questions.length) %
-          questions.length;
+          ((cardIndex % questions.length) +
+            questions.length) % questions.length;
       } else {
         cardIndex = 0;
       }
@@ -643,7 +698,6 @@
         ? questions[cardIndex][1]
         : "이 카테고리에 등록된 질문이 없습니다.";
 
-      /* 카드를 넘길 때마다 색상 변경 */
       $("card").style.backgroundColor =
         palette[colorIndex % palette.length];
 
@@ -653,24 +707,35 @@
       $("backTwo").style.backgroundColor =
         palette[(colorIndex + 2) % palette.length];
 
-      document.querySelectorAll(".category-btn")
+      document
+        .querySelectorAll(".category-btn")
         .forEach((button, i) => {
           const active = i === categoryIndex;
+
           button.classList.toggle("active", active);
-          button.setAttribute("aria-pressed", String(active));
+
+          button.setAttribute(
+            "aria-pressed",
+            String(active)
+          );
         });
     }
 
-    /* 카테고리 버튼 생성 */
-    categories.forEach((group, i) => {
+    /* =====================================
+       CARD CATEGORIES
+    ===================================== */
+
+    categories.forEach((category, i) => {
       const button = document.createElement("button");
+
+      button.type = "button";
       button.className = "category-btn";
-      button.textContent = group.label;
+      button.textContent = category.label;
 
       button.addEventListener("click", () => {
         if (i === categoryIndex || animating) return;
 
-        flipCard(() => {
+        changeCard(() => {
           categoryIndex = i;
           cardIndex = 0;
         });
@@ -679,14 +744,19 @@
       $("categories").appendChild(button);
     });
 
-    /* 카드 전환 */
-    function flipCard(update, direction = "left") {
+    /* =====================================
+       CARD ANIMATION
+    ===================================== */
+
+    function changeCard(callback, direction = "left") {
       if (animating) return;
+
       animating = true;
 
       const card = $("card");
 
       card.classList.remove("entering");
+
       card.classList.add(
         direction === "left"
           ? "switching-left"
@@ -694,9 +764,10 @@
       );
 
       setTimeout(() => {
-        update();
-        colorIndex += 1;
-        render();
+        callback();
+
+        colorIndex++;
+        renderCard();
 
         card.classList.remove(
           "switching-left",
@@ -708,76 +779,105 @@
         setTimeout(() => {
           card.classList.remove("entering");
           animating = false;
-        }, 310);
+        }, 320);
+
       }, 200);
     }
 
-    function move(amount) {
-      const questions = getQuestions();
-      const count = questions.length;
+    function moveCard(amount) {
+      const count = getQuestions().length;
 
-      if (!count || animating) return;
+      if (count === 0 || animating) return;
 
-      flipCard(() => {
+      changeCard(() => {
         cardIndex =
           (cardIndex + amount + count) % count;
+
       }, amount > 0 ? "left" : "right");
     }
 
-    $("prev").addEventListener("click", () => move(-1));
-    $("next").addEventListener("click", () => move(1));
+    $("prev").addEventListener("click", () => {
+      moveCard(-1);
+    });
+
+    $("next").addEventListener("click", () => {
+      moveCard(1);
+    });
 
     $("random").addEventListener("click", () => {
       const count = getQuestions().length;
 
       if (count < 2 || animating) return;
 
-      const amount =
+      const offset =
         1 + Math.floor(Math.random() * (count - 1));
 
-      move(amount);
+      moveCard(offset);
     });
 
-    /* 모바일 카드 스와이프 */
-    let touchStart = 0;
+    /* =====================================
+       MOBILE SWIPE
+    ===================================== */
 
-    $("deck").addEventListener("touchstart", event => {
-      touchStart = event.changedTouches[0].screenX;
-    }, { passive: true });
+    let touchStartX = 0;
 
-    $("deck").addEventListener("touchend", event => {
-      const diff =
-        event.changedTouches[0].screenX - touchStart;
+    $("deck").addEventListener(
+      "touchstart",
+      event => {
+        touchStartX =
+          event.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
 
-      if (Math.abs(diff) > 55) {
-        move(diff < 0 ? 1 : -1);
-      }
-    }, { passive: true });
+    $("deck").addEventListener(
+      "touchend",
+      event => {
+        const difference =
+          event.changedTouches[0].screenX -
+          touchStartX;
 
-    /* 구글 스프레드시트 연결 */
+        if (Math.abs(difference) > 55) {
+          moveCard(difference < 0 ? 1 : -1);
+        }
+      },
+      { passive: true }
+    );
+
+    /* =====================================
+       GOOGLE SHEETS
+       화면에 연결 상태를 표시하지 않음
+    ===================================== */
+
     let requestId = 0;
 
-    function showStatus(message, connected) {
-      $("syncText").textContent = message;
-      $("syncDot").classList.toggle("connected", connected);
-    }
-
     function loadQuestions() {
-      const callbackName = "talkCardsSheet" + (++requestId);
+      const callbackName =
+        "talkCardsSheet" + (++requestId);
+
       const script = document.createElement("script");
 
       let finished = false;
 
       function cleanup() {
         script.remove();
-        delete window[callbackName];
+
+        try {
+          delete window[callbackName];
+        } catch (error) {
+          window[callbackName] = undefined;
+        }
       }
 
       const timeout = setTimeout(() => {
         if (finished) return;
+
         finished = true;
         cleanup();
-        showStatus("시트 연결 확인 필요 · 기본 질문 사용 중", false);
+
+        console.warn(
+          "구글 시트 연결에 실패했습니다. 현재 질문을 유지합니다."
+        );
       }, 9000);
 
       window[callbackName] = response => {
@@ -786,50 +886,47 @@
         finished = true;
         clearTimeout(timeout);
 
-        const loaded = (response.table?.rows || [])
-          .map(row => [
-            String(row.c?.[0]?.v ?? "").trim(),
-            String(row.c?.[1]?.v ?? "").trim()
-          ])
-          .filter(row =>
-            categories.some(group => group.name === row[0]) &&
-            row[1]
-          );
-
-        if (loaded.length) {
-          const previousQuestion =
-            getQuestions()[cardIndex]?.[1];
-
-          rows = loaded;
-
-          const updatedQuestions = getQuestions();
-
-          const previousIndex =
-            updatedQuestions.findIndex(
-              row => row[1] === previousQuestion
+        try {
+          const loaded = (response.table?.rows || [])
+            .map(row => [
+              String(row.c?.[0]?.v ?? "").trim(),
+              String(row.c?.[1]?.v ?? "").trim()
+            ])
+            .filter(row =>
+              categories.some(
+                category => category.name === row[0]
+              ) && row[1]
             );
 
-          cardIndex = previousIndex >= 0
-            ? previousIndex
-            : Math.min(
-                cardIndex,
-                Math.max(0, updatedQuestions.length - 1)
-              );
+          if (loaded.length > 0) {
+            const oldQuestion =
+              getQuestions()[cardIndex]?.[1];
 
-          render();
+            rows = loaded;
 
-          showStatus(
-            "구글 시트 연결됨 · 질문 " + loaded.length + "개",
-            true
+            const updated = getQuestions();
+
+            const found = updated.findIndex(
+              row => row[1] === oldQuestion
+            );
+
+            cardIndex = found >= 0
+              ? found
+              : Math.min(
+                  cardIndex,
+                  Math.max(0, updated.length - 1)
+                );
+
+            renderCard();
+          }
+        } catch (error) {
+          console.error(
+            "질문 데이터를 처리하지 못했습니다.",
+            error
           );
-        } else {
-          showStatus(
-            "질문을 불러오지 못했습니다 · 기본 질문 사용 중",
-            false
-          );
+        } finally {
+          cleanup();
         }
-
-        cleanup();
       };
 
       script.onerror = () => {
@@ -839,13 +936,13 @@
         clearTimeout(timeout);
         cleanup();
 
-        showStatus(
-          "시트 연결 확인 필요 · 기본 질문 사용 중",
-          false
+        console.warn(
+          "구글 시트 요청에 실패했습니다."
         );
       };
 
       const query = encodeURIComponent("select A,B");
+
       const handler = encodeURIComponent(
         "out:json;responseHandler:" + callbackName
       );
@@ -863,42 +960,55 @@
       document.head.appendChild(script);
     }
 
-    $("refresh").addEventListener("click", loadQuestions);
+    /* =====================================
+       TIMER
+       카드 및 시트 코드와 독립적으로 동작
+    ===================================== */
 
-    /* 질문은 60초마다 갱신 */
-    setInterval(loadQuestions, 60000);
+    const clockElement = $("clock");
+    const minusButton = $("minus");
+    const plusButton = $("plus");
+    const playButton = $("play");
+    const resetButton = $("reset");
 
-    /* 1분 단위 타이머 */
     let minutes = 20;
-    let remaining = minutes * 60;
+    let remaining = 20 * 60;
     let running = false;
     let deadline = 0;
 
     function updateClock() {
-      const seconds = Math.ceil(remaining);
-
-      $("clock").textContent =
-        String(Math.floor(seconds / 60)).padStart(2, "0") +
-        ":" +
-        String(seconds % 60).padStart(2, "0");
-
-      $("play").textContent = running ? "Ⅱ" : "▶";
-
-      $("play").setAttribute(
-        "aria-label",
-        running ? "일시정지" : "타이머 시작"
+      const seconds = Math.max(
+        0,
+        Math.ceil(remaining)
       );
 
-      $("minus").disabled = minutes <= 1;
-      $("plus").disabled = minutes >= 999;
+      const displayMinutes = Math.floor(seconds / 60);
+      const displaySeconds = seconds % 60;
+
+      clockElement.textContent =
+        String(displayMinutes).padStart(2, "0") +
+        ":" +
+        String(displaySeconds).padStart(2, "0");
+
+      playButton.textContent =
+        running ? "Ⅱ" : "▶";
+
+      playButton.setAttribute(
+        "aria-label",
+        running ? "타이머 일시정지" : "타이머 시작"
+      );
+
+      minusButton.disabled = minutes <= 1;
+      plusButton.disabled = minutes >= 999;
     }
 
     function adjustTime(amount) {
-      minutes = Math.max(
+      const nextMinutes = Math.max(
         1,
         Math.min(999, minutes + amount)
       );
 
+      minutes = nextMinutes;
       remaining = minutes * 60;
       running = false;
       deadline = 0;
@@ -906,57 +1016,22 @@
       updateClock();
     }
 
-    $("minus").addEventListener("click", () => {
-      adjustTime(-1);
-    });
-
-    $("plus").addEventListener("click", () => {
-      adjustTime(1);
-    });
-
-    $("play").addEventListener("click", () => {
-      if (running) {
-        remaining = Math.max(
-          0,
-          (deadline - Date.now()) / 1000
-        );
-
-        running = false;
-        deadline = 0;
-      } else {
-        if (remaining <= 0) {
-          remaining = minutes * 60;
-        }
-
-        deadline = Date.now() + remaining * 1000;
-        running = true;
-      }
-
-      updateClock();
-    });
-
-    $("reset").addEventListener("click", () => {
-      running = false;
-      deadline = 0;
-      remaining = minutes * 60;
-
-      updateClock();
-    });
-
     function showToast(message) {
-      const oldToast = document.querySelector(".toast");
-      if (oldToast) oldToast.remove();
+      document.querySelector(".toast")?.remove();
 
       const toast = document.createElement("div");
+
       toast.className = "toast";
       toast.textContent = message;
 
       document.body.appendChild(toast);
 
-      setTimeout(() => toast.remove(), 4000);
+      setTimeout(() => {
+        toast.remove();
+      }, 4000);
     }
 
-    setInterval(() => {
+    function tick() {
       if (!running) return;
 
       remaining = Math.max(
@@ -965,18 +1040,76 @@
       );
 
       if (remaining <= 0) {
+        remaining = 0;
         running = false;
         deadline = 0;
+
         showToast("대화 시간이 끝났어요!");
       }
 
       updateClock();
-    }, 250);
+    }
 
-    /* 초기 실행 */
-    render();
+    minusButton.addEventListener("click", () => {
+      adjustTime(-1);
+    });
+
+    plusButton.addEventListener("click", () => {
+      adjustTime(1);
+    });
+
+    playButton.addEventListener("click", () => {
+      if (running) {
+        tick();
+
+        running = false;
+        deadline = 0;
+      } else {
+        if (remaining <= 0) {
+          remaining = minutes * 60;
+        }
+
+        deadline =
+          Date.now() + remaining * 1000;
+
+        running = true;
+      }
+
+      updateClock();
+    });
+
+    resetButton.addEventListener("click", () => {
+      running = false;
+      deadline = 0;
+      remaining = minutes * 60;
+
+      updateClock();
+    });
+
+    setInterval(tick, 250);
+
+    document.addEventListener(
+      "visibilitychange",
+      () => {
+        if (!document.hidden) {
+          tick();
+        }
+      }
+    );
+
+    /* =====================================
+       INITIALIZATION
+    ===================================== */
+
     updateClock();
+    renderCard();
+
+    /* 시트 오류가 발생해도 타이머는 정상 작동 */
     loadQuestions();
+
+    /* 질문은 60초마다 새로 불러옴 */
+    setInterval(loadQuestions, 60000);
+
   </script>
 </body>
 </html>
